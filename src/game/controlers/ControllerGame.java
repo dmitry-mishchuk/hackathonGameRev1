@@ -2,8 +2,6 @@ package game.controlers;
 
 import game.models.Field;
 import game.models.Player;
-
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class ControllerGame {
@@ -19,7 +17,7 @@ public class ControllerGame {
     }
 
     public int inputCoordinat(String coordinat){
-        System.out.printf("Введите координату %s", coordinat);
+        System.out.printf("Введите координату %s: ", coordinat);
         return scanner.nextInt();
     }
 
