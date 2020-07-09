@@ -85,11 +85,8 @@ public class ControllerGame {
     private boolean checkDiogonal1(Player player){
         int count = 0;
         for (int i = 0; i < field.getSIZE_FIELD(); i++) {
-            for (int j = i; j <= i; j++) {
-                if (field.getCellField(i, j) == player.getFIGURE()){
-                    count++;
-                    break;
-                }
+            if (field.getCellField(i, i) == player.getFIGURE()){
+                count++;
             }
         }
         if (count == field.getSIZE_FIELD()){
@@ -100,11 +97,8 @@ public class ControllerGame {
     private boolean checkDiogonal2(Player player){
         int count = 0;
         for (int i = field.getSIZE_FIELD()-1; i >= 0; i--) {
-            for (int j = field.getSIZE_FIELD()-1-i; j >= field.getSIZE_FIELD()-1-i; j--) {
-                if (field.getCellField(i, j) == player.getFIGURE()){
-                    count++;
-                    break;
-                }
+            if (field.getCellField(i, field.getSIZE_FIELD()-1-i) == player.getFIGURE()){
+                count++;
             }
         }
         if (count == field.getSIZE_FIELD()){
@@ -114,8 +108,6 @@ public class ControllerGame {
     }
 
     public boolean getWinnerPlayer(Player player){
-        System.out.printf("H=%s, V=%s, D1=%s, D2=%s\n", checkHorinzontal(player), checkVertical(player),
-                checkDiogonal1(player), checkDiogonal2(player));
         return  checkHorinzontal(player) || checkVertical(player) ||
                 checkDiogonal1(player) || checkDiogonal2(player);
     }
