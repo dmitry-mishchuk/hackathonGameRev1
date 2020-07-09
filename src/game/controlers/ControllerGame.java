@@ -52,9 +52,8 @@ public class ControllerGame {
         return true;
     }
 
-    private boolean getWinnerPlayer(Player player){
+    private boolean checkHorinzontal(Player player){
         int count;
-        //проверка по горизонтали
         for (int i = 0; i < field.getSIZE_FIELD(); i++) {
             count = 0;
             for (int j = 0; j < field.getSIZE_FIELD(); j++) {
@@ -66,7 +65,10 @@ public class ControllerGame {
                 }
             }
         }
-        //проверка по вертикали
+        return false;
+    }
+    private boolean checkVertical(Player player){
+        int count;
         for (int i = 0; i < field.getSIZE_FIELD(); i++) {
             count = 0;
             for (int j = 0; j < field.getSIZE_FIELD(); j++) {
@@ -78,10 +80,12 @@ public class ControllerGame {
                 }
             }
         }
-        //проверка по диагонали 1
-        count = 0;
+        return false;
+    }
+    private boolean checkDiogonal1(Player player){
+        int count = 0;
         for (int i = 0; i < field.getSIZE_FIELD(); i++) {
-            for (int j = 0; j < field.getSIZE_FIELD(); j++) {
+            for (int j = i; j <= i; j++) {
                 if (field.getCellField(i, j) == player.getFIGURE()){
                     count++;
                     break;
@@ -91,10 +95,12 @@ public class ControllerGame {
         if (count == field.getSIZE_FIELD()){
             return true;
         }
-        //проверка по диагонали 2
-        count = 0;
-        for (int i = field.getSIZE_FIELD(); i >= 0; i--) {
-            for (int j = field.getSIZE_FIELD(); j >= 0; j--) {
+        return false;
+    }
+    private boolean checkDiogonal2(Player player){
+        int count = 0;
+        for (int i = field.getSIZE_FIELD()-1; i >= 0; i--) {
+            for (int j = field.getSIZE_FIELD()-1-i; j >= field.getSIZE_FIELD()-1-i; j--) {
                 if (field.getCellField(i, j) == player.getFIGURE()){
                     count++;
                     break;
@@ -107,7 +113,14 @@ public class ControllerGame {
         return false;
     }
 
-    public String getWinnerPlayer(){
+    public boolean getWinnerPlayer(Player player){
+        System.out.printf("H=%s, V=%s, D1=%s, D2=%s\n", checkHorinzontal(player), checkVertical(player),
+                checkDiogonal1(player), checkDiogonal2(player));
+        return  checkHorinzontal(player) || checkVertical(player) ||
+                checkDiogonal1(player) || checkDiogonal2(player);
+    }
+
+    public String getNameWinnerPlayer(){
         if (getWinnerPlayer(player1)){
             return player1.getNAME();
         }

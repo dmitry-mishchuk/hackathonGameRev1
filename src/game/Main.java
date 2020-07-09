@@ -14,15 +14,24 @@ public class Main {
         Veiw veiw = new Veiw(field);
         veiw.showField();
         int x, y;
+        while (!controllerGame.endGame()){
+            x = controllerGame.inputCoordinat("x");
+            y = controllerGame.inputCoordinat("y");
+            controllerGame.movePlayer(x, y, player1);
+            veiw.showField();
+            if (controllerGame.getWinnerPlayer(player1)){
+                break;
+            }
+            x = controllerGame.inputCoordinat("x");
+            y = controllerGame.inputCoordinat("y");
+            controllerGame.movePlayer(x, y, player2);
+            veiw.showField();
+            if (controllerGame.getWinnerPlayer(player2)){
+                break;
+            }
 
-        x = controllerGame.inputCoordinat("x");
-        y = controllerGame.inputCoordinat("y");
-        controllerGame.movePlayer(x, y, player1);
-        veiw.showField();
+        }
+        System.out.printf("Winner the %s: \n", controllerGame.getNameWinnerPlayer());
 
-        x = controllerGame.inputCoordinat("x");
-        y = controllerGame.inputCoordinat("y");
-        controllerGame.movePlayer(x, y, player2);
-        veiw.showField();
     }
 }
